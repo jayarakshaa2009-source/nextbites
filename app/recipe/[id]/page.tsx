@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getRecipe } from "../../data/recipes";
+import { getRecipe, recipes } from "../../data/recipes";
+
+export function generateStaticParams() {
+  return recipes.map((recipe) => ({ id: recipe.id }));
+}
 
 export default async function RecipePage({
   params,
@@ -42,8 +46,8 @@ export default async function RecipePage({
       <section className="detail-section">
         <h2>Steps</h2>
         <ol>
-          {recipe.steps.map((step) => (
-            <li key={step}>{step}</li>
+          {recipe.steps.map((step, index) => (
+            <li key={index}>{step}</li>
           ))}
         </ol>
       </section>
